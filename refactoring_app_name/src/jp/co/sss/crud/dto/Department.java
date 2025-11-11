@@ -6,56 +6,33 @@ package jp.co.sss.crud.dto;
 
 public class Department {
 
-	private Integer deptId;
+	/** 部署名 */
 	private String deptName;
+	/** 部署ID */
+	private int deptId;
 
-	/**
-	 *
-	 */
+	/** 部署DTOのコンストラクタ */
 	public Department() {
 	}
 
-	/**
-	 * @param deptId
-	 * @param deptName
-	 */
-	public Department(Integer deptId, String deptName) {
-		super();
-		this.deptId = deptId;
-		this.deptName = deptName;
-	}
-
-	/**
-	 * @return deptId
-	 */
-	public Integer getDeptId() {
-		return deptId;
-	}
-
-	/**
-	 * @param deptId セットする deptId
-	 */
-	public void setDeptId(Integer deptId) {
+	/** 部署DTOの引数intのコンストラクタ */
+	public Department(int deptId) {
 		this.deptId = deptId;
 	}
 
-	/**
-	 * @return deptName
-	 */
 	public String getDeptName() {
 		return deptName;
 	}
 
-	/**
-	 * @param deptName セットする deptName
-	 */
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
 
-	@Override
-	public String toString() {
-		return "Department [deptId=" + deptId + ", deptName=" + deptName + "]";
+	public int getDeptId() {
+		return deptId;
 	}
 
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
+	}
 }

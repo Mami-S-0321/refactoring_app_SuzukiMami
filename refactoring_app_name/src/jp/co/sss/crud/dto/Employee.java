@@ -1,124 +1,118 @@
 package jp.co.sss.crud.dto;
 
+import jp.co.sss.crud.util.ConstantValue;
+
 /**
  * @author Mami Suzuki
  */
 
 public class Employee {
-	
-	private Integer empId;
-	private String empName;
-	private Integer gender;
+
+	/** 社員ID */
+	private int empId;
+	/** 性別(数字) */
+	private int gender;
+	/** 誕生日 */
 	private String birthday;
+	/** 社員名 */
+	private String empName;
+	/** 部署 */
 	private Department department;
 
 	/**
-	 *
+	 *  社員テーブルDTOのコンストラクタ
 	 */
 	public Employee() {
 	}
 
 	/**
-	 * @param empId
-	 * @param empName
-	 * @param gender
-	 * @param birthday
-	 * @param department
+	 * 社員テーブルDTOのコンストラクタ（登録時に使用)
 	 */
-	public Employee(Integer empId, String empName, Integer gender, String birthday, Department department) {
-		this.empId = empId;
-		this.empName = empName;
+	public Employee(String empName, int gender, String birthday, int deptId) {
 		this.gender = gender;
 		this.birthday = birthday;
-		this.department = department;
-	}
-
-	/**
-	 * @return empId
-	 */
-	public Integer getEmpId() {
-		return empId;
-	}
-
-	/**
-	 * @param empId セットする empId
-	 */
-	public void setEmpId(Integer empId) {
-		this.empId = empId;
-	}
-
-	/**
-	 * @return empName
-	 */
-	public String getEmpName() {
-		return empName;
-	}
-
-	/**
-	 * @param empName セットする empName
-	 */
-	public void setEmpName(String empName) {
 		this.empName = empName;
+		this.department = new Department(deptId);
 	}
 
 	/**
-	 * @return gender
+	 * 社員データを文字列にする
+	 * @return 社員データの文字列
 	 */
-	public Integer getGender() {
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(empId);
+		sb.append("\t");
+		sb.append(empName);
+		sb.append("\t");
+		sb.append(getGenderText(gender));
+		sb.append("\t");
+		sb.append(birthday);
+		sb.append("\t");
+		sb.append(department.getDeptName());
+		sb.append("\t");
+
+		return sb.toString();
+	}
+
+	/**
+	 * 取得した性別(数字)を対応する性別(日本語)に変換する
+	 * @return 性別(日本語)
+	 */
+	public String getGenderText(int gender) {
+		/** 性別 */
+		String gender_ja = "";
+		if (this.gender == ConstantValue.MALE) {
+			gender_ja = ConstantValue.STRING_MALE;
+		} else if (this.gender == ConstantValue.FEMALE) {
+			gender_ja = ConstantValue.STRING_FEMALE;
+		} else if (this.gender == ConstantValue.OTHER) {
+			gender_ja = ConstantValue.STRING_OTHER;
+		} else if (this.gender == ConstantValue.NO_ANSWER) {
+			gender_ja = ConstantValue.STRING_NO_ANSWER;
+		}
+		return gender_ja;
+	}
+
+	public int getGender() {
 		return gender;
 	}
 
-	/**
-	 * @param gender セットする gender
-	 */
-	public void setGender(Integer gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 
-	/**
-	 * @return birthday
-	 */
 	public String getBirthday() {
 		return birthday;
 	}
 
-	/**
-	 * @param birthday セットする birthday
-	 */
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
-	/**
-	 * @return department
-	 */
+	public int getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
 	public Department getDepartment() {
 		return department;
 	}
 
-	/**
-	 * @param department セットする department
-	 */
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-
-	@Override
-	public String toString() {
-		String gender_ja = "";
-		if (this.gender == 1) {
-			gender_ja = "男性";
-		} else if (this.gender == 2) {
-			gender_ja = "女性";
-		} else if (this.gender == 0) {
-			gender_ja = "回答なし";
-		} else if (this.gender == 9) {
-			gender_ja = "その他";
-		}
-
-		return empId + "\t" + empName + "\t" + gender_ja + "\t" + birthday
-				+ "\t" + department.getDeptName();
-	}
-
 
 }
